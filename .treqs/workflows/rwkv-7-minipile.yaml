@@ -10,7 +10,6 @@ secrets:
 setup:
   command: |
     export PATH=/opt/pytorch/bin:$PATH
-    python -m pip install --quiet requests || true
     rm -rf *.egg-info src/*.egg-info
     if command -v uv >/dev/null 2>&1; then
       test "$(uv --version | awk '{print $1, $2}')" = "uv 0.12.3"
