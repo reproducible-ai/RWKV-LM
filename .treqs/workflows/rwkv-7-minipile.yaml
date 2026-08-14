@@ -7,6 +7,21 @@ name: rwkv-7-minipile reproduction
 secrets:
   - HF_TOKEN            # artifact upload
 
+host_preflight:
+  command: |
+    set -eu
+    pwd
+    test -d "$PWD/.git"
+    test -x /bin/bash
+    readlink -f /bin/bash
+    id
+    df -h "$PWD" /opt
+    df -hi "$PWD" /opt
+    free -m
+    ulimit -a
+    env | sed 's/=.*//' | sort
+  trace: off
+
 setup:
   command: |
     export PATH=/opt/pytorch/bin:$PATH
