@@ -13,7 +13,7 @@ setup:
     python -m pip install --quiet requests || true
     rm -rf *.egg-info src/*.egg-info
     if command -v uv >/dev/null 2>&1; then
-      test "$(uv --version | awk '{{print $1, $2}}')" = "uv 0.12.3"
+      test "$(uv --version | awk '{print $1, $2}')" = "uv 0.12.3"
       echo UV_SOURCE=baked
     else
       curl -fsSL -o /tmp/uv-campaign.tar.gz \
@@ -21,7 +21,7 @@ setup:
       echo "600cf9a742aca00d292673b16b5acffaa7b8c269a364ad0c2e79498dcb1fe101  /tmp/uv-campaign.tar.gz" | sha256sum -c -
       tar -xzf /tmp/uv-campaign.tar.gz -C /tmp
       sudo install -m 0755 /tmp/uv-x86_64-unknown-linux-gnu/uv /usr/local/bin/uv
-      test "$(/usr/local/bin/uv --version | awk '{{print $1, $2}}')" = "uv 0.12.3"
+      test "$(/usr/local/bin/uv --version | awk '{print $1, $2}')" = "uv 0.12.3"
       echo UV_SOURCE=bootstrapped
     fi
     curl -sS -o /tmp/roar_wheel/roar_cli-0.4.4rc7-cp310-abi3-manylinux_2_34_x86_64.whl --create-dirs "https://test-files.pythonhosted.org/packages/61/98/f7925c6aeba591de9e490bc2b070737e17b5ed948b2cb05ef8b86730537a/roar_cli-0.4.4rc7-cp310-abi3-manylinux_2_34_x86_64.whl"
