@@ -47,13 +47,13 @@ train_two_steps:
     export PATH=/opt/workloads/rwkv-7-minipile/bin:$PATH
 
     export TRACKIO_SPACE_ID=reproducible-ai/experiments PYTHONUNBUFFERED=1
-    roar run -n train_two_steps --wandb-to-trackio -- sh -c 'exec env -C RWKV-v7/train_temp TRACKIO_SPACE_ID=reproducible-ai/experiments python train.py --load_model 0 --wandb rwkv-7-minipile --proj_dir out/L12-D768-x070 --my_testing x070 --ctx_len 512 --train_stage 3 --epoch_count 999999 --epoch_begin 0 --data_file data/minipile --my_exit_tokens 16384 --magic_prime 2926181 --num_nodes 1 --micro_bsz 16 --n_layer 12 --n_embd 768 --kernel @rwkv3 --lr_init 6e-4 --lr_final 6e-5 --warmup_steps 10 --beta1 0.9 --beta2 0.99 --adam_eps 1e-18 --data_type binidx --vocab_size 65536 --weight_decay 0.001 --epoch_save 10 --head_size 64 --head_chunk 0 --accelerator gpu --devices 1 --precision bf16 --strategy deepspeed_stage_2 --grad_cp 1 --enable_progress_bar True'
+    roar run -n train_two_steps --wandb-to-trackio -- sh -c 'exec env -C RWKV-v7/train_temp TRACKIO_SPACE_ID=reproducible-ai/experiments python train.py --load_model 0 --wandb rwkv-7-minipile --proj_dir out/L12-D768-x070 --my_testing x070 --ctx_len 512 --train_stage 3 --epoch_count 999999 --epoch_begin 0 --data_file data/minipile --my_exit_tokens 1498226207 --magic_prime 2926181 --num_nodes 1 --micro_bsz 16 --n_layer 12 --n_embd 768 --kernel @rwkv3 --lr_init 6e-4 --lr_final 6e-5 --warmup_steps 10 --beta1 0.9 --beta2 0.99 --adam_eps 1e-18 --data_type binidx --vocab_size 65536 --weight_decay 0.001 --epoch_save 1 --head_size 64 --head_chunk 0 --accelerator gpu --devices 1 --precision bf16 --strategy deepspeed_stage_2 --grad_cp 1 --enable_progress_bar True --max_steps 2'
   trace: off
 
 label:
   command: |
     export PATH=/opt/pytorch/bin:$PATH
-    roar label set artifact RWKV-v7/train_temp/out/L12-D768-x070/rwkv-final.pth model.name=rwkv-7-minipile model.version=7 license.id=Apache-2.0 license.name='Apache License 2.0' description='RWKV-7 language model pretraining on MiniPile, truncated after two optimizer steps.' documentation.url=https://github.com/BlinkDL/RWKV-LM/tree/658042ca30222715c1d3ab662a3c556824dc6618/RWKV-v7/train_temp
+    roar label set artifact RWKV-v7/train_temp/out/L12-D768-x070/rwkv-0.pth model.name=rwkv-7-minipile model.version=7 license.id=Apache-2.0 license.name='Apache License 2.0' description='RWKV-7 language model pretraining on MiniPile, truncated after two optimizer steps.' documentation.url=https://github.com/BlinkDL/RWKV-LM/tree/658042ca30222715c1d3ab662a3c556824dc6618/RWKV-v7/train_temp
   trace: off
 
 publish:
@@ -62,5 +62,5 @@ publish:
   command: |
     export PATH=/opt/pytorch/bin:$PATH
     roar status --untracked-dirs
-    roar put RWKV-v7/train_temp/out/L12-D768-x070/rwkv-final.pth RWKV-v7/train_temp/out/L12-D768-x070/train_log.txt hf://reproducible-ai/rwkv-7-minipile --public --yes --no-tag -m "RWKV-7 language model pretraining on MiniPile, truncated after two optimizer steps; no convergence claim."
+    roar put RWKV-v7/train_temp/out/L12-D768-x070/rwkv-0.pth RWKV-v7/train_temp/out/L12-D768-x070/train_log.txt hf://reproducible-ai/rwkv-7-minipile --public --yes --no-tag -m "RWKV-7 language model pretraining on MiniPile, truncated after two optimizer steps; no convergence claim."
   trace: off
