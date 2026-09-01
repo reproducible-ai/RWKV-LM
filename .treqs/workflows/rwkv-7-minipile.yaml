@@ -47,7 +47,7 @@ train_two_steps:
     export PATH=/opt/workloads/rwkv-7-minipile/bin:$PATH
 
     export TRACKIO_SPACE_ID=reproducible-ai/experiments PYTHONUNBUFFERED=1
-    roar run -n train_two_steps --wandb-to-trackio -- env -C RWKV-v7/train_temp TRACKIO_SPACE_ID=reproducible-ai/experiments python train.py --load_model 0 --wandb rwkv-7-minipile --proj_dir out/L12-D768-x070 --my_testing x070 --ctx_len 512 --train_stage 3 --epoch_count 999999 --epoch_begin 0 --data_file data/minipile --my_exit_tokens 16384 --magic_prime 2926181 --num_nodes 1 --micro_bsz 16 --n_layer 12 --n_embd 768 --kernel @rwkv3 --lr_init 6e-4 --lr_final 6e-5 --warmup_steps 10 --beta1 0.9 --beta2 0.99 --adam_eps 1e-18 --data_type binidx --vocab_size 65536 --weight_decay 0.001 --epoch_save 10 --head_size 64 --head_chunk 0 --accelerator gpu --devices 1 --precision bf16 --strategy deepspeed_stage_2 --grad_cp 1 --enable_progress_bar True
+    roar run -n train_two_steps --wandb-to-trackio -- sh -c 'exec env -C RWKV-v7/train_temp TRACKIO_SPACE_ID=reproducible-ai/experiments python train.py --load_model 0 --wandb rwkv-7-minipile --proj_dir out/L12-D768-x070 --my_testing x070 --ctx_len 512 --train_stage 3 --epoch_count 999999 --epoch_begin 0 --data_file data/minipile --my_exit_tokens 16384 --magic_prime 2926181 --num_nodes 1 --micro_bsz 16 --n_layer 12 --n_embd 768 --kernel @rwkv3 --lr_init 6e-4 --lr_final 6e-5 --warmup_steps 10 --beta1 0.9 --beta2 0.99 --adam_eps 1e-18 --data_type binidx --vocab_size 65536 --weight_decay 0.001 --epoch_save 10 --head_size 64 --head_chunk 0 --accelerator gpu --devices 1 --precision bf16 --strategy deepspeed_stage_2 --grad_cp 1 --enable_progress_bar True'
   trace: off
 
 label:
