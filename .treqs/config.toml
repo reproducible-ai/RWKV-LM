@@ -1,0 +1,11 @@
+[context]
+api_url = "https://api.treqs.ai"
+owner_id = "e39ab1b0-7f8a-4473-b2eb-027d6feb6e9d"
+owner_type = "organization"
+owner_username = "reproducible-ai"
+owner_display_name = "Reproducible AI"
+project_id = "cf0b1f1d-2d23-4d69-941d-47a10154e126"
+project_slug = "rwkv-7-minipile"
+project_name = "RWKV-7 MiniPile"
+current_username = "christreqs"
+saved_at = "2026-09-01T12:44:23.267709Z"
